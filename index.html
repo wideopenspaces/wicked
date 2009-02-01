@@ -51,68 +51,116 @@
     <div class="description">
       Wicked Good extensions to Object in the vein of #andand
     </div>
+    
+<h2>A few common patterns</h2>
 
-    <p>First, a couple of aliases for #andand:<p>
+<h3>[A] exists and has quality [B]?</h3>
+  
+<p>In Ruby, the && operator joins two true clauses, equivalent to asking "are A <strong>and</strong> B both true?" One of the
+  more common uses for && is checking to see if an object exists before asking it for an attribute.</p>
+
+<pre>  if a && a.b
+    "hi"
+  end
+  </pre>
+
+<p>If we didn't check for 'a' before checking a.b, we could be asking the wrong guy about b...
+  as in "'Hey, Mr. Nothin' - you know anything about this 'b' thing?"</p>
+  
+<p>Let's just say Nil (Mr. Nothing) usually throws a fit when you ask him that sort of question. But if we check for 'a' AND 'a.b' and
+   'a' doesn't exist, Ruby doesn't evaluate the second half of the expression. Nil gets left alone. (<em>to be fair, most Ruby objects
+     shout pretty loud when you ask them about a method they don't have. Some get creative and come up with things on the fly, though!</em>)</p>
+     
+<p>In Rails applications, you'll commonly see:</p>
+
+<pre>  if (user = User.find(params[:id])) && phone = user.phone_number
+    puts phone
+  end</pre>
+
+<p>Which boils down to <em>"if 'user' exists, then get me attribute 'phone_number' of 'user' as 'phone'"</em></p>
+
+<p>And <strong>that's</strong> the pattern 'andand' was created to simplify. To keep Nil and friends quiet and make the
+  pattern more elegant.</p>
+  
+<pre>  if phone = user.andand.phone_number
+    puts phone
+  end</pre>
+  
+<h3>Logical Sugar for #andand</h3>
 
 <h4>Object#et</h4>
 
-<pre>  if phone = user.et.number
-    call(phone)
-  end</pre>
-
-<p>"Et" is Latin for 'and'. This works the same as 'andand', so
-it is the same as this, but shorter :)</p>
-
-<pre>  if user && (phone = user.number)
-    call(phone)
+<p> #et is an alias for #andand for brevity. "Et" is Latin for 'and'. This works the same as 'andand', but is much shorter! ;)</p> 
+<pre>  if phone = user.et.phone_number
+    puts phone
   end</pre>
 
   <h4>Object#ask</h4>
 
-  <pre>  if phone = user.ask.number
-      call(phone)
+  <p>#ask is another alias for #andand. I like it the most because it describes what the pattern actually does:
+    we ask "user, are you there, and what's your phone number?" Since we're asking nicely and not demanding
+    an answer, our objects won't throw a fit.</p>
+
+<pre>    if phone = user.ask.phone_number
+      puts phone
     end</pre>
 
-<p>  I like the syntax of #ask - it's describing what's going on,
-  and since you're just 'asking' the askee doesn't have to tell you.</p>
-
-<h3>Guarded Booleans</h3>
-
 <h4>Object#is</h4>
+
+<p>Yet another alias, this one providing the positive equivalent of 'aint', syntactically useful for 
+  places where you'd use 'andand' when checking that a boolean attribute is true.</p>
 
 <pre>  user.destroy if user.is.revoked?</pre>    
 
 <p>works the same as</p>
 
 <pre>  user.destroy if user && user.revoked?</pre>
+<p>&nbsp;</p>
 
-<p><strong>NOTE</strong>: be wary of using 'unless' with Object#is or Object#aint -- if
-the method doesn't exist on the receiver (user does not respond to revoked?),
-both #is and #aint return nil, which can be wicked bad if you don't 
-grok your logic.</p>
+<h3>[A] exists and does NOT have quality [B]?</h3>
+
+<pre>  if user && !user.cancelled?</pre>
+
+<p>Here we're checking if our user exists before checking to make sure that they haven't cancelled their account.
+  Effectively, we want user to exist and cancelled to be false, which is why we have that (!) before the second 'user'.</p>
+  
+<p>Using #andand in this case won't work, because the 2nd half will evaluate to false, and stop our friendly 'if' block.</p>
+
+<p>So what do we do? How would we say it in English? "if it ain't broke, don't fix it", right?<p>
+  
+<p>Why not do that in Ruby?</p>
+<h3>Never say ain't</h3>
 
 <h4>Object#aint</h4>
 
-<pre>   user.revoke! if user.aint.revoked?</pre>
+<pre>   puts "Don't fix it!" if it.aint.broken?</pre>
    
 <p>works the same as</p>
   
-<pre>   user.revoke! if user && !user.revoked?</pre>
-   
+<pre>   if it && !it.broken?
+    puts "Don't fix it"
+   end</pre>
+
 <p>For those who aint from the northeast and say 'ant' when they mean their 
 'aunt', Object#aint is also aliased as:</p>
 
 <pre>   #is_not
    #isnt
    #notnot</pre>
-   
+
+   <p><strong>NOTE</strong>: be wary of using 'unless' with Object#is or Object#aint -- if
+   the method doesn't exist on the receiver (it does not respond to revoked?),
+   both #is and #aint return nil, which can be wicked bad if you don't 
+   grok your logic.</p>   
    
 <p><strong>ONE MORE NOTE</strong>: #is and #aint are intended for safely checking boolean methods. 
 Other uses are expressly not covered under any warranty ;)</p>
 <h2>Dependencies</h2>
 <p>andand >= 1.3.1</p>
 <h2>Install</h2>
-<p>sudo gem install wideopenspaces-wicked</p>
+<p><pre>   sudo gem install wideopenspaces-wicked</pre></p>
+<p>If using in Rails 2.2+, add the following line to config/environment.rb:</p>
+<p><pre>  config.gem "wideopenspaces-wicked", :lib => 'wicked'</pre></p>
 <h2>License</h2>
 <p>MIT</p>
 <h2>Authors</h2>
