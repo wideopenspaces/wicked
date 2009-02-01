@@ -10,10 +10,9 @@ module Wicked
     # Aliases for 'andand'
     #     if phone = user.et.number; .... ; end
     alias_method :et, :andand       # Latin for 'and'
-    
-    # As in 'User, eh? Wot's yer number?'
-    #     if phone = user.eh?.number; .... ; end
-    alias_method :eh?, :andand
+
+    #     if phone = user.ask.number ....
+    alias_method :ask, :andand
     
     # Alias for andand that's meaningful when checking booleans; 
     # this is the positive version of aint.
@@ -48,7 +47,10 @@ module Wicked
     alias_method :notnot, :aint
     
     # Hehe
-    alias_method :aintnot, :is
+    alias_method :aintnot, :andand
+    # As in 'User, eh? Wot's yer number?'
+    #     if phone = user.eh?.number; .... ; end
+    alias_method :eh?, :andand
   end
   
 end
