@@ -52,61 +52,65 @@
       Wicked Good extensions to Object in the vein of #andand
     </div>
 
-    <p>First, a couple of aliases for #andand:
+    <p>First, a couple of aliases for #andand:<p>
 
-*Object#et*
+<h4>Object#et</h4>
 
-  if phone = user.et.number
+<pre>  if phone = user.et.number
     call(phone)
-  end
+  end</pre>
 
 "Et" is Latin for 'and'. This works the same as 'andand', so
 it is the same as this, but shorter :)
 
-  if user && (phone = user.number)
+<pre>  if user && (phone = user.number)
     call(phone)
-  end
+  end</pre>
 
-*Object#is*
+<h4>Object#is</h4>
 
-  user.destroy if user.is.revoked?
-    
-works the same as
+<pre>  user.destroy if user.is.revoked?</pre>    
+
+<p>works the same as</p>
 
   user.destroy if user && user.revoked?
 
-NOTE: be wary of using 'unless' with Object#is or Object#aint -- if
+<p><strong>NOTE</strong>: be wary of using 'unless' with Object#is or Object#aint -- if
 the method doesn't exist on the receiver (user does not respond to revoked?),
 both #is and #aint return nil, which can be wicked bad if you don't 
-grok your logic.
+grok your logic.</p>
 
-*Object#aint*
+<h4>Object#aint</h4>
 
-   user.revoke! if user.aint.revoked?
+<pre>   user.revoke! if user.aint.revoked?</pre>
    
-works the same as
+<p>works the same as</p>
   
-   user.revoke! if user && !user.revoked?
+<pre>   user.revoke! if user && !user.revoked?</pre>
    
-For those who aint from the northeast and say 'ant' when they mean their 
-'aunt', Object#aint is also aliased as:
+<p>For those who aint from the northeast and say 'ant' when they mean their 
+'aunt', Object#aint is also aliased as:</p>
 
-   #is_not
+<pre>   #is_not
    #isnt
-   #notnot
+   #notnot</pre>
    
    
-ONE MORE NOTE: #is and #aint are intended for safely checking boolean methods. 
-Other uses are expressly not covered under any warranty ;)</p><h2>Dependencies</h2>
+<p><strong>ONE MORE NOTE</strong>: #is and #aint are intended for safely checking boolean methods. 
+Other uses are expressly not covered under any warranty ;)</p>
+<h2>Dependencies</h2>
 <p>andand >= 1.3.1</p>
 <h2>Install</h2>
 <p>sudo gem install wideopenspaces-wicked</p>
 <h2>License</h2>
 <p>MIT</p>
 <h2>Authors</h2>
-<p>Jacob Stetser (jake@wideopenspac.es)<br/><br/>      </p>
+<p>Jacob Stetser (jake@wideopenspac.es)
+<br/>
+<br/>      </p>
 <h2>Contact</h2>
-<p>Jacob Stetser (jake@wideopenspac.es)<br/>      </p>
+<p>Jacob Stetser (jake@wideopenspac.es)
+<br/>      </p>
 
 
     <h2>Download</h2>
