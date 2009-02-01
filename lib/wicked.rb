@@ -11,6 +11,10 @@ module Wicked
     #     if phone = user.et.number; .... ; end
     alias_method :et, :andand       # Latin for 'and'
     
+    # As in 'User, eh? Wot's yer number?'
+    #     if phone = user.eh?.number; .... ; end
+    alias_method :eh?, :andand
+    
     # Alias for andand that's meaningful when checking booleans; 
     # this is the positive version of aint.
     #     "don't fix it" unless it.is.broken?
