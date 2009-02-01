@@ -37,8 +37,21 @@ module Wicked
     # Don't be a doofus, use this wisely, on boolean methods only
     # if you know what's good for you.
 
-    def aint (p = nil)
+    def aint(p = nil)
       NotReturningMe.new(self) 
+    end
+    
+    # A funny byproduct of using aint...
+    # But before you get confused, read it as 'is not nothing, which should be true except for nil)
+    def aint_nothin?
+      self.aint.nil?
+    end
+    # See? You can laugh...
+    alias_method :aint_it_somethin?, :aint_nothin?
+    
+    # Ok, so here goes - true if nothing, like nil
+    def is_nothin?
+      !self.is.nil?
     end
     
     # A few stylistic variations on aint
