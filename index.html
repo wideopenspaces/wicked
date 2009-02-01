@@ -60,12 +60,23 @@
     call(phone)
   end</pre>
 
-"Et" is Latin for 'and'. This works the same as 'andand', so
-it is the same as this, but shorter :)
+<p>"Et" is Latin for 'and'. This works the same as 'andand', so
+it is the same as this, but shorter :)</p>
 
 <pre>  if user && (phone = user.number)
     call(phone)
   end</pre>
+
+  <h4>Object#ask</h4>
+
+  <pre>  if phone = user.ask.number
+      call(phone)
+    end</pre>
+
+<p>  I like the syntax of #ask - it's describing what's going on,
+  and since you're just 'asking' the askee doesn't have to tell you.</p>
+
+<h3>Guarded Booleans</h3>
 
 <h4>Object#is</h4>
 
