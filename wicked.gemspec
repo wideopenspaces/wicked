@@ -2,11 +2,11 @@
 
 Gem::Specification.new do |s|
   s.name = %q{wicked}
-  s.version = "0.1.3"
+  s.version = "0.2.0"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Jacob Stetser"]
-  s.date = %q{2009-01-31}
+  s.date = %q{2009-02-01}
   s.description = %q{Wicked Good extensions to Object in the vein of #andand}
   s.email = %q{jake@wideopenspac.es}
   s.files = ["VERSION.yml", "lib/wicked.rb", "test/test_helper.rb", "test/wicked_test.rb"]
