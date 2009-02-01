@@ -73,7 +73,7 @@ it is the same as this, but shorter :)
 
 <p>works the same as</p>
 
-  user.destroy if user && user.revoked?
+<pre>  user.destroy if user && user.revoked?</pre>
 
 <p><strong>NOTE</strong>: be wary of using 'unless' with Object#is or Object#aint -- if
 the method doesn't exist on the receiver (user does not respond to revoked?),
