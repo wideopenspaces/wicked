@@ -1,9 +1,56 @@
 wicked
 ======
 
-Description goes here.
+Wicked Good extensions to Object in the vein of #andand --
+
+First, a couple of aliases for #andand:
+
+*Object#et*
+
+  if phone = user.et.number
+    call(phone)
+  end
+
+"Et" is Latin for 'and'. This works the same as 'andand', so
+it is the same as this, but shorter :)
+
+  if user && (phone = user.number)
+    call(phone)
+  end
+
+*Object#is*
+
+  user.destroy if user.is.revoked?
+    
+works the same as
+
+  user.destroy if user && user.revoked?
+
+NOTE: be wary of using 'unless' with Object#is or Object#aint -- if
+the method doesn't exist on the receiver (user does not respond to revoked?),
+both #is and #aint return nil, which can be wicked bad if you don't 
+grok your logic.
+
+*Object#aint*
+
+   user.revoke! if user.aint.revoked?
+   
+works the same as
+  
+   user.revoke! if user && !user.revoked?
+   
+For those who aint from the northeast and say 'ant' when they mean their 
+'aunt', Object#aint is also aliased as:
+
+   #is_not
+   #isnt
+   #notnot
+   
+   
+ONE MORE NOTE: #is and #aint are intended for safely checking boolean methods. 
+Other uses are expressly not covered under any warranty ;)
 
 COPYRIGHT
 =========
 
-Copyright (c) 2008 Jacob Stetser. See LICENSE for details.
+Copyright (c) 2009 Jacob Stetser. See LICENSE for details.

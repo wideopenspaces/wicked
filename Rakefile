@@ -7,11 +7,12 @@ begin
   require 'jeweler'
   Jeweler::Tasks.new do |s|
     s.name = "wicked"
-    s.summary = %Q{TODO}
+    s.summary = %Q{Wicked Good extensions to Object in the vein of #andand}
     s.email = "jake@wideopenspac.es"
     s.homepage = "http://github.com/wideopenspaces/wicked"
-    s.description = "TODO"
+    s.description = "Wicked Good extensions to Object in the vein of #andand"
     s.authors = ["Jacob Stetser"]
+    s.add_dependency("andand",[">= 1.3.1"])
   end
 rescue LoadError
   puts "Jeweler not available. Install it with: sudo gem install technicalpickles-jeweler -s http://gems.github.com"
